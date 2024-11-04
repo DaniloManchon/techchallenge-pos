@@ -37,9 +37,9 @@ public class BebidaController {
     }
 
     @GetMapping
-    public ResponseEntity<Bebida> buscarBebidaNome(@RequestParam("nomeBanco") String nomeBanco) {
+    public ResponseEntity<Bebida> buscarBebidaNome(@RequestParam("nome") String nome) {
         try {
-            return bebidaUseCase.buscarBebida(nomeBanco);
+            return bebidaUseCase.buscarBebida(nome);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -47,20 +47,20 @@ public class BebidaController {
 
 
     @PutMapping
-    public ResponseEntity atualizarBebidas(@RequestParam("nomeBanco") String nomeBanco, @RequestBody Bebida bebida) {
+    public ResponseEntity<Bebida> atualizarBebidas(@RequestParam("nome") String nome, @RequestBody Bebida bebida) {
         try {
-            return bebidaUseCase.atualizarBebida(nomeBanco, bebida);
+            return bebidaUseCase.atualizarBebida(nome, bebida);
         } catch (Exception e) {
-            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @DeleteMapping
-    public ResponseEntity apagarBebida(@RequestParam("nomeBanco") String nomeBanco) {
+    public ResponseEntity<String> apagarBebida(@RequestParam("nome") String nome) {
         try {
-            return bebidaUseCase.apagarBebida(nomeBanco);
+            return bebidaUseCase.apagarBebida(nome);
         } catch (Exception e) {
-            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
